@@ -31,7 +31,7 @@ UIStroke.Color = Color3.fromRGB(255, 255, 255)
 
 Title.Parent = MainFrame
 Title.Size = UDim2.new(1, 0, 0, 40)
-Title.Text = "JULZ HUB V4"
+Title.Text = "JULZ HUB V4.5"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.Font = Enum.Font.GothamBold
@@ -78,34 +78,44 @@ SubmitBtn.MouseButton1Click:Connect(function()
         
         local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         local Window = Rayfield:CreateWindow({
-           Name = "Julz Hub | V4 EMPIRE",
-           LoadingTitle = "Mobile Excellence",
+           Name = "Julz Hub | V4.5 EMPIRE",
+           LoadingTitle = "Mobile Optimized...",
            LoadingSubtitle = "by JULZ",
            Theme = "Default"
+        })
+
+        -- [NEW TAB: BUILD A BOAT ⛵]
+        local BABFTTab = Window:CreateTab("Build A Boat ⛵", 4483362458)
+        BABFTTab:CreateSection("Auto-Farming & Building")
+
+        BABFTTab:CreateButton({
+            Name = "SpectrX Hub (Best Mobile Farm)",
+            Callback = function()
+                loadstring(game:HttpGet('https://raw.githubusercontent.com/Arhangels-team/SpectreX-Hub/main/babft%20auto%20farm.lua'))()
+            end
+        })
+
+        BABFTTab:CreateButton({
+            Name = "Asu Hub (Auto-Build & More)",
+            Callback = function()
+                loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Loader.lua'))()
+            end
+        })
+
+        BABFTTab:CreateButton({
+            Name = "Vynixius BABFT",
+            Callback = function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Build%20A%20Boat%20For%20Treasure/Source.lua"))()
+            end
         })
 
         -- [TSB - THE STRONGEST BATTLEGROUNDS]
         local TSBTab = Window:CreateTab("TSB 🥋", 4483362458)
         TSBTab:CreateSection("Keyless Kill Farms")
-        
         TSBTab:CreateButton({
-            Name = "Speed Hub X (Best Keyless Farm)",
+            Name = "Speed Hub X (Auto-Kill)",
             Callback = function()
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
-            end
-        })
-
-        TSBTab:CreateButton({
-            Name = "Phantasm (Keyless Mobile)",
-            Callback = function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/ATrainz/Phantasm/refs/heads/main/Games/TSB.lua"))()
-            end
-        })
-
-        TSBTab:CreateButton({
-            Name = "Vexon Hub (Universal Combat)",
-            Callback = function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()
             end
         })
 
@@ -116,21 +126,11 @@ SubmitBtn.MouseButton1Click:Connect(function()
 
         -- [BLOX FRUITS]
         local BloxTab = Window:CreateTab("Blox Fruits 🏴‍☠️", 4483362458)
-        BloxTab:CreateButton({ Name = "Redz Hub (Best for Mobile)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end })
-        BloxTab:CreateButton({ Name = "Alchemy Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/DeivandSama/AlchemyHub/main/Main.lua"))() end })
-
-        -- [DOORS / HORROR]
-        local HorrorTab = Window:CreateTab("Horror 🔦", 4483362458)
-        HorrorTab:CreateButton({ Name = "MSPAINT (Doors)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/upbolt/mzpaint/main/doors.lua"))() end })
-
-        -- [SHOOTERS / ARSENAL]
-        local ShooterTab = Window:CreateTab("Shooters 🔫", 4483362458)
-        ShooterTab:CreateButton({ Name = "Thunder Z", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/ThunderZ-Hub/HUB/main/Arsenal'))() end })
+        BloxTab:CreateButton({ Name = "Redz Hub (Mobile)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end })
 
         -- [UNIVERSAL]
         local UnivTab = Window:CreateTab("Universal 🌌", 4483362458)
         UnivTab:CreateButton({ Name = "Infinite Yield", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end })
-        UnivTab:CreateButton({ Name = "Dex Explorer (Mobile)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))() end })
 
         -- [PLAYER]
         local PlayerTab = Window:CreateTab("Player 🏃", 4483362458)
