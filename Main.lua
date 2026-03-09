@@ -1,7 +1,7 @@
 --[[
-    JULZ hub | V37 Mobile Ultimate
-    Updates: Fixed Piano Link, Mobile Optimized Raycasting, Silent Aim
-    Security: Manual Key Entry (Kick on Fail)
+    JULZ hub | V38 Mobile
+    Features: JJS, Silent Aim, ESP, Click TP, Shaders, Piano, +New Script
+    Security: Manual Key (Kick on Wrong Entry)
 ]]
 
 local TargetKey = "JULZISTHEBEST"
@@ -14,7 +14,7 @@ local Camera = workspace.CurrentCamera
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
--- 1. MOBILE-READY KEY SYSTEM (KICK ON WRONG KEY)
+-- 1. MANUAL KEY SYSTEM
 local function LoadKeySystem()
     local AuthGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
     local MainFrame = Instance.new("Frame", AuthGui)
@@ -22,7 +22,7 @@ local function LoadKeySystem()
     Instance.new("UICorner", MainFrame)
     
     local Title = Instance.new("TextLabel", MainFrame)
-    Title.Text = "JULZ HUB V37"; Title.Size = UDim2.new(1, 0, 0, 50); Title.TextColor3 = Color3.new(1, 1, 1); Title.Font = Enum.Font.GothamBold; Title.BackgroundTransparency = 1
+    Title.Text = "JULZ HUB V38"; Title.Size = UDim2.new(1, 0, 0, 50); Title.TextColor3 = Color3.new(1, 1, 1); Title.Font = Enum.Font.GothamBold; Title.BackgroundTransparency = 1
 
     local Input = Instance.new("TextBox", MainFrame)
     Input.PlaceholderText = "Enter Key..."; Input.Size = UDim2.new(0.85, 0, 0, 50); Input.Position = UDim2.new(0.075, 0, 0.35, 0); Input.BackgroundColor3 = Color3.fromRGB(30, 30, 30); Input.TextColor3 = Color3.new(1, 1, 1)
@@ -54,7 +54,7 @@ local Config = {
     FOV = 150
 }
 
--- 3. MOBILE TELEPORT TOOL (Optimized Tap)
+-- 3. MOBILE CLICK TP TOOL
 local function GiveTPTool()
     local TPTool = Instance.new("Tool")
     TPTool.Name = "JULZ TP TOOL"
@@ -98,30 +98,28 @@ setreadonly(mt, true)
 
 -- 5. INTERFACE (LUNA)
 local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Softworks/Luna-Interface-Suite/main/source.lua"))()
-local Window = Luna:CreateWindow({ Name = "JULZ hub", Subtitle = "V37 Mobile", LoadingEnabled = true })
+local Window = Luna:CreateWindow({ Name = "JULZ hub", Subtitle = "V38 Mobile", LoadingEnabled = true })
 
 local Combat = Window:CreateTab({ Name = "Combat", Icon = "shutter_speed" })
-local Visuals = Window:CreateTab({ Name = "Visuals", Icon = "visibility" })
+local Visuals = Window:NewTab({ Name = "Visuals", Icon = "visibility" })
 local Movement = Window:CreateTab({ Name = "Movement", Icon = "bolt" })
 local Extra = Window:CreateTab({ Name = "Scripts", Icon = "auto_awesome" })
 
--- COMBAT
+-- TAB CONTENT
 Combat:CreateToggle({ Name = "Silent Aim", Callback = function(v) Config.SilentAim = v end })
 Combat:CreateSlider({ Name = "Silent FOV", Range = {50, 800}, CurrentValue = 150, Callback = function(v) Config.FOV = v end })
 Combat:CreateToggle({ Name = "Hitbox Expander", Callback = function(v) Config.HitboxExpander = v end })
 Combat:CreateSlider({ Name = "Hitbox Size", Range = {2, 35}, CurrentValue = 2, Callback = function(v) Config.HitboxSize = v end })
 
--- VISUALS
 Visuals:CreateToggle({ Name = "Infinite ESP", Callback = function(v) Config.EspEnabled = v end })
-Visuals:CreateButton({ Name = "JJS Shaders", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-jango-premium-crack-131377"))() end })
+Visuals:CreateButton({ Name = "Load JJS Shaders", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-jango-premium-crack-131377"))() end })
 
--- MOVEMENT
 Movement:CreateButton({ Name = "Give Click TP Tool", Callback = function() GiveTPTool() end })
 Movement:CreateSlider({ Name = "WalkSpeed", Range = {16, 250}, CurrentValue = 16, Callback = function(v) Config.WalkSpeed = v end })
 
--- EXTRA (SCRIPTS)
 Extra:CreateButton({ Name = "Load TBO Hub (JJS)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))() end })
-Extra:CreateButton({ Name = "Auto Piano (Targeted Fix)", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-talentless-crack-75521"))() end })
+Extra:CreateButton({ Name = "Auto Piano (Talentless)", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-talentless-crack-75521"))() end })
+Extra:CreateButton({ Name = "Load Jeffrey Epstein Script", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Jeffrey-epstein-script-115494"))() end })
 
 -- 6. CORE HEARTBEAT
 RunService.Heartbeat:Connect(function()
@@ -138,4 +136,4 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
-Luna:Notification({ Title = "JULZ hub", Content = "V37 Ready for Mobile!" })
+Luna:Notification({ Title = "JULZ hub", Content = "V38 Updated with New Script!" })
