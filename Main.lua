@@ -131,10 +131,12 @@ local Movement = Window:CreateTab({ Name = "Movement", Icon = "bolt" })
 local Extra = Window:CreateTab({ Name = "Scripts", Icon = "auto_awesome" })
 local Settings = Window:CreateTab({ Name = "Settings", Icon = "settings" })
 
+-- COMBAT
 Combat:CreateToggle({ Name = "Silent Aim", Callback = function(v) Config.SilentAim = v end })
 Combat:CreateSlider({ Name = "FOV", Range = {50, 800}, CurrentValue = 150, Callback = function(v) Config.FOV = v end })
 Combat:CreateToggle({ Name = "Hitbox Expander", Callback = function(v) Config.HitboxExpander = v end })
 
+-- VISUALS
 Visuals:CreateToggle({ Name = "Highlight ESP", Callback = function(v) 
     Config.EspEnabled = v 
     for _, p in pairs(Players:GetPlayers()) do if p.Character and p.Character:FindFirstChild("JulzHighlight") then p.Character.JulzHighlight.Enabled = v end end
@@ -142,18 +144,21 @@ end })
 Visuals:CreateButton({ Name = "Fullbright", Callback = function() game:GetService("Lighting").Brightness = 2; game:GetService("Lighting").GlobalShadows = false end })
 Visuals:CreateButton({ Name = "JJS Shaders", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-jango-premium-crack-131377"))() end })
 
+-- MOVEMENT
 Movement:CreateSlider({ Name = "WalkSpeed", Range = {16, 250}, CurrentValue = 16, Callback = function(v) Config.WalkSpeed = v end })
 Movement:CreateToggle({ Name = "Fly (Stable)", Callback = function(v) Config.Fly = v end })
 Movement:CreateToggle({ Name = "Noclip", Callback = function(v) Config.Noclip = v end })
 Movement:CreateToggle({ Name = "Infinite Jump", Callback = function(v) Config.InfiniteJump = v end })
 
+-- EXTRA SCRIPTS
 Extra:CreateButton({ Name = "Infinite Yield", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end })
-Extra:CreateButton({ Name = "JJS", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))()
+Extra:CreateButton({ Name = "JJS", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end })
 Extra:CreateButton({ Name = "asuscript", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Ultimte-B3BFT-Script-28601"))() end })
 Extra:CreateButton({ Name = "Rivals Script", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-BEST-Keyless-Undetected-133239"))() end })
 Extra:CreateButton({ Name = "XVC Hub", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-XVC-Hub-79830"))() end })
 Extra:CreateButton({ Name = "white block body", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/juliuskingmick-creator/Julzhub/refs/heads/main/Femboy.lua"))() end })
 
+-- SETTINGS
 Settings:CreateButton({ Name = "Server Hop", Callback = function() 
     local Servers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100"))
     for _, s in pairs(Servers.data) do if s.playing < s.maxPlayers and s.id ~= game.JobId then game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, s.id) break end end
