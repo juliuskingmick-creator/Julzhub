@@ -148,11 +148,11 @@ Movement:CreateToggle({ Name = "Noclip", Callback = function(v) Config.Noclip = 
 Movement:CreateToggle({ Name = "Infinite Jump", Callback = function(v) Config.InfiniteJump = v end })
 
 Extra:CreateButton({ Name = "Infinite Yield", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end })
-Extra:CreateButton({ Name = "TBO Loader", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))() end })
-Extra:CreateButton({ Name = "BABFT Ultimate", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Ultimte-B3BFT-Script-28601"))() end })
+Extra:CreateButton({ Name = "JJS", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))()
+Extra:CreateButton({ Name = "asuscript", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Ultimte-B3BFT-Script-28601"))() end })
 Extra:CreateButton({ Name = "Rivals Script", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-BEST-Keyless-Undetected-133239"))() end })
 Extra:CreateButton({ Name = "XVC Hub", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-XVC-Hub-79830"))() end })
-Extra:CreateButton({ Name = "Apply R6 Femboy", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/juliuskingmick-creator/Julzhub/refs/heads/main/Femboy.lua"))() end })
+Extra:CreateButton({ Name = "white block body", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/juliuskingmick-creator/Julzhub/refs/heads/main/Femboy.lua"))() end })
 
 Settings:CreateButton({ Name = "Server Hop", Callback = function() 
     local Servers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100"))
