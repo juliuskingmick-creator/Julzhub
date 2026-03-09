@@ -2,7 +2,7 @@ local CorrectKey = "JULZTHEPWN"
 local WrongAttempts = 0 
 local DiscordLink = "https://discord.gg/cukP3aqCe"
 
--- 1. CREATE THE LOGIN UI
+-- 1. CREATE THE LIGHT MODE CLASH UI
 local ScreenGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
@@ -11,53 +11,63 @@ local GetKeyBtn = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner", MainFrame)
 local UIGradient = Instance.new("UIGradient", MainFrame)
+local UIStroke = Instance.new("UIStroke", MainFrame)
 
 ScreenGui.Parent = game.CoreGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Pure White Base
 MainFrame.Position = UDim2.new(0.5, -125, 0.5, -90)
 MainFrame.Size = UDim2.new(0, 250, 0, 180)
 MainFrame.Active = true
 MainFrame.Draggable = true 
-UICorner.CornerRadius = UDim.new(0, 10)
+UICorner.CornerRadius = UDim.new(0, 12)
 
-UIGradient.Rotation = 45
+-- THE LIGHT CLASH (Bright Blue vs Vibrant Red with White Middle)
+UIGradient.Rotation = 0 
 UIGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 50)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 255, 255)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(153, 50, 204))
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 200, 255)),   -- Bright Void Blue
+    ColorSequenceKeypoint.new(0.45, Color3.fromRGB(200, 150, 255)),-- Light Purple
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 255, 255)), -- Pure White Clash
+    ColorSequenceKeypoint.new(0.55, Color3.fromRGB(255, 100, 100)),-- Bright Shrine Red
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 200, 200))    -- Soft Pinkish Red
 })
+
+UIStroke.Thickness = 3
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
 
 Title.Parent = MainFrame
 Title.Size = UDim2.new(1, 0, 0, 40)
-Title.Text = "JULZ HUB LOGIN"
-Title.TextColor3 = Color3.new(1, 1, 1)
-Title.BackgroundTransparency = 0.6
-Title.BackgroundColor3 = Color3.new(0,0,0)
+Title.Text = "DOMAIN CLASH LOGIN"
+Title.TextColor3 = Color3.fromRGB(40, 40, 40) -- Dark text for Light Mode
+Title.BackgroundTransparency = 0.8
+Title.BackgroundColor3 = Color3.new(1,1,1)
 Title.Font = Enum.Font.GothamBold
-Title.TextSize = 18
+Title.TextSize = 16
 
 TextBox.Parent = MainFrame
-TextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.32, 0)
 TextBox.Size = UDim2.new(0.8, 0, 0, 30)
-TextBox.PlaceholderText = "Enter Key..."
-TextBox.BackgroundTransparency = 0.5
-TextBox.BackgroundColor3 = Color3.new(0,0,0)
-TextBox.TextColor3 = Color3.new(1,1,1)
+TextBox.PlaceholderText = "Enter Cursed Key..."
+TextBox.BackgroundTransparency = 0.4
+TextBox.BackgroundColor3 = Color3.new(1,1,1)
+TextBox.TextColor3 = Color3.fromRGB(0,0,0)
+TextBox.Font = Enum.Font.Gotham
 
 SubmitBtn.Parent = MainFrame
 SubmitBtn.Position = UDim2.new(0.1, 0, 0.55, 0)
-SubmitBtn.Size = UDim2.new(0.8, 0, 0, 30)
-SubmitBtn.Text = "LOGIN"
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(153, 50, 204)
-SubmitBtn.TextColor3 = Color3.new(1,1,1)
+SubmitBtn.Size = UDim2.new(0.8, 0, 0, 32)
+SubmitBtn.Text = "EXPAND DOMAIN"
+SubmitBtn.BackgroundColor3 = Color3.new(1,1,1)
+SubmitBtn.BackgroundTransparency = 0.2
+SubmitBtn.TextColor3 = Color3.fromRGB(40, 40, 40)
 SubmitBtn.Font = Enum.Font.GothamBold
 
 GetKeyBtn.Parent = MainFrame
 GetKeyBtn.Position = UDim2.new(0.1, 0, 0.78, 0)
 GetKeyBtn.Size = UDim2.new(0.8, 0, 0, 30)
 GetKeyBtn.Text = "GET KEY (DISCORD)"
-GetKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 150)
-GetKeyBtn.TextColor3 = Color3.new(1,1,1)
+GetKeyBtn.BackgroundTransparency = 0.4
+GetKeyBtn.BackgroundColor3 = Color3.new(1,1,1)
+GetKeyBtn.TextColor3 = Color3.fromRGB(40, 40, 40)
 
 -- LOGIC
 GetKeyBtn.MouseButton1Click:Connect(function()
@@ -73,35 +83,30 @@ SubmitBtn.MouseButton1Click:Connect(function()
         
         local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         local Window = Rayfield:CreateWindow({
-           Name = "Julz Hub | Mobile",
-           LoadingTitle = "Welcome Julz",
-           LoadingSubtitle = "Amethyst Edition",
+           Name = "Julz Hub | Light Edition",
+           LoadingTitle = "Domain Expansion: Authenticated",
+           LoadingSubtitle = "By Gemini",
+           Theme = "Light", -- THIS SETS RAYFIELD TO WHITE MODE
            KeySystem = false 
         })
 
-        -- MAIN TAB
+        -- TABS & CONTENT
         local MainTab = Window:CreateTab("Main 🏠", 4483362458) 
-
         MainTab:CreateButton({
-           Name = "Femboy Morph (R15 Only)",
+           Name = "Femboy Morph (R6/R15)",
            Callback = function()
                local char = game.Players.LocalPlayer.Character
                local hum = char:WaitForChild("Humanoid")
-               local desc = hum:GetAppliedDescription()
-               
-               -- Aesthetic Scaling
-               desc.Height = 0.85
-               desc.Width = 0.75
-               desc.Proportion = 1
-               
-               -- Clothing & Hair IDs (Pink/Soft Style)
-               desc.Shirt = 6917631589
-               desc.Pants = 7192301130
-               desc.HairAccessory = "14603416757"
-               desc.Face = 12142220
-               
-               hum:ApplyDescription(desc)
-               Rayfield:Notify({Title = "Success", Content = "Morph Applied!", Duration = 2})
+               if hum.RigType == Enum.HumanoidRigType.R15 then
+                   local desc = hum:GetAppliedDescription()
+                   desc.Height, desc.Width, desc.Proportion = 0.85, 0.75, 1
+                   desc.Shirt, desc.Pants = 6917631589, 7192301130
+                   desc.HairAccessory, desc.Face = "14603416757", 12142220
+                   hum:ApplyDescription(desc)
+               else
+                   char.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=6917631589"
+                   char.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=7192301130"
+               end
            end,
         })
 
@@ -118,7 +123,6 @@ SubmitBtn.MouseButton1Click:Connect(function()
            end,
         })
 
-        -- SCRIPTS TAB
         local ScriptTab = Window:CreateTab("Scripts 📜", 4483362458)
         ScriptTab:CreateButton({ Name = "Talentless", Callback = function() loadstring(game:HttpGet("https://egirlswow.pages.dev/cracks/talentless"))() end })
         ScriptTab:CreateButton({ Name = "JJS Script", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end })
@@ -128,13 +132,13 @@ SubmitBtn.MouseButton1Click:Connect(function()
     else
         WrongAttempts = WrongAttempts + 1
         if WrongAttempts >= 2 then
-            game.Players.LocalPlayer:Kick("❌ Invalid Key (2/2)")
+            game.Players.LocalPlayer:Kick("❌ Kicked: Invalid Key.")
         else
             SubmitBtn.Text = "WRONG! (1/2)"
-            SubmitBtn.BackgroundColor3 = Color3.new(1,0,0)
+            SubmitBtn.BackgroundColor3 = Color3.fromRGB(255, 150, 150)
             wait(1.5)
-            SubmitBtn.Text = "LOGIN"
-            SubmitBtn.BackgroundColor3 = Color3.fromRGB(153, 50, 204)
+            SubmitBtn.Text = "EXPAND DOMAIN"
+            SubmitBtn.BackgroundColor3 = Color3.new(1,1,1)
         end
     end
 end)
