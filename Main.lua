@@ -1,149 +1,111 @@
-local CorrectKey = "JULZTHEPWN"
-local WrongAttempts = 0 
-local DiscordLink = "https://discord.gg/cukP3aqCe"
+-- [[ CONFIGURATION ]]
+local CorrectKey = "Tent-acoustic-neck eight-adapt-category IX;i4j-n:fLAlIsB KOkW|TAP<upSNLQs"
+local MyLinkvertise = "https://linkvertise.com/2419595/dQ836JlqG4QY?o=sharing"
 
--- ==========================================
--- 1. MOBILE-FRIENDLY LOGIN (DRAGGABLE)
--- ==========================================
-local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local TextBox = Instance.new("TextBox")
-local SubmitBtn = Instance.new("TextButton")
-local GetKeyBtn = Instance.new("TextButton")
-local Title = Instance.new("TextLabel")
-local UICorner = Instance.new("UICorner", MainFrame)
-local UIStroke = Instance.new("UIStroke", MainFrame)
-
-ScreenGui.Parent = game:GetService("CoreGui")
-ScreenGui.Name = "JulzKeySystem"
-
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainFrame.Position = UDim2.new(0.5, -125, 0.5, -90)
-MainFrame.Size = UDim2.new(0, 250, 0, 180)
+-- [[ GUI SETUP ]]
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+local MainFrame = Instance.new("Frame", ScreenGui)
+MainFrame.Size = UDim2.new(0, 350, 0, 200)
+MainFrame.Position = UDim2.new(0.5, -175, 0.5, -100)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
-MainFrame.Draggable = true 
+MainFrame.Draggable = true -- Added to make it mobile friendly!
 
-UICorner.CornerRadius = UDim.new(0, 12)
-UIStroke.Thickness = 2
-UIStroke.Color = Color3.fromRGB(255, 255, 255)
-
-Title.Parent = MainFrame
+-- UI Elements
+local Title = Instance.new("TextLabel", MainFrame)
 Title.Size = UDim2.new(1, 0, 0, 40)
-Title.Text = "JULZ HUB V4.5"
+Title.Text = "JULZ HUB LOGIN"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
-Title.Font = Enum.Font.GothamBold
-Title.TextSize = 18
 
-TextBox.Parent = MainFrame
-TextBox.Position = UDim2.new(0.1, 0, 0.32, 0)
-TextBox.Size = UDim2.new(0.8, 0, 0, 30)
-TextBox.PlaceholderText = "Enter Key..."
-TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-TextBox.TextColor3 = Color3.new(1,1,1)
-Instance.new("UICorner", TextBox)
+local TextBox = Instance.new("TextBox", MainFrame)
+TextBox.Size = UDim2.new(0, 280, 0, 40)
+TextBox.Position = UDim2.new(0.5, -140, 0.4, -20)
+TextBox.PlaceholderText = "Paste Key Here..."
+TextBox.Text = ""
 
-SubmitBtn.Parent = MainFrame
-SubmitBtn.Position = UDim2.new(0.1, 0, 0.55, 0)
-SubmitBtn.Size = UDim2.new(0.8, 0, 0, 32)
-SubmitBtn.Text = "LOGIN"
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-SubmitBtn.TextColor3 = Color3.new(1,1,1)
-SubmitBtn.Font = Enum.Font.GothamBold
-Instance.new("UICorner", SubmitBtn)
+local VerifyBtn = Instance.new("TextButton", MainFrame)
+VerifyBtn.Size = UDim2.new(0, 130, 0, 40)
+VerifyBtn.Position = UDim2.new(0.25, -65, 0.75, -20)
+VerifyBtn.Text = "Verify Key"
+VerifyBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
 
-GetKeyBtn.Parent = MainFrame
-GetKeyBtn.Position = UDim2.new(0.1, 0, 0.78, 0)
-GetKeyBtn.Size = UDim2.new(0.8, 0, 0, 30)
-GetKeyBtn.Text = "GET KEY"
-GetKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-GetKeyBtn.TextColor3 = Color3.new(1,1,1)
-Instance.new("UICorner", GetKeyBtn)
+local GetKeyBtn = Instance.new("TextButton", MainFrame)
+GetKeyBtn.Size = UDim2.new(0, 130, 0, 40)
+GetKeyBtn.Position = UDim2.new(0.75, -65, 0.75, -20)
+GetKeyBtn.Text = "Get Key (Copy)"
+GetKeyBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
 
--- ==========================================
--- 2. HUB INITIALIZATION
--- ==========================================
+-- [[ BUTTON LOGIC ]]
+
+-- Logic for "Get Key"
 GetKeyBtn.MouseButton1Click:Connect(function()
-    setclipboard(DiscordLink)
-    GetKeyBtn.Text = "LINK COPIED!"
-    task.wait(2)
-    GetKeyBtn.Text = "GET KEY"
+    if setclipboard then
+        setclipboard(MyLinkvertise)
+        GetKeyBtn.Text = "Copied to Clipboard!"
+        task.wait(2)
+        GetKeyBtn.Text = "Get Key (Copy)"
+    else
+        GetKeyBtn.Text = "Error: Use an Executor"
+    end
 end)
 
-SubmitBtn.MouseButton1Click:Connect(function()
+-- Logic for "Verify"
+VerifyBtn.MouseButton1Click:Connect(function()
     if TextBox.Text == CorrectKey then
-        ScreenGui:Destroy()
+        ScreenGui:Destroy() -- Close the UI
+        
+        ----------------------------------------------------
+        -- THE NORMAL JULZ HUB (ALL GAMES)
+        ----------------------------------------------------
         
         local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         local Window = Rayfield:CreateWindow({
            Name = "Julz Hub | V4.5 EMPIRE",
-           LoadingTitle = "Mobile Optimized...",
+           LoadingTitle = "Mobile Excellence",
            LoadingSubtitle = "by JULZ",
            Theme = "Default"
         })
 
-        -- [NEW TAB: BUILD A BOAT ⛵]
+        -- [TAB: BLOX FRUITS 🏴‍☠️]
+        local BloxTab = Window:CreateTab("Blox Fruits 🏴‍☠️", 4483362458)
+        BloxTab:CreateSection("Keyless Mobile Scripts")
+        BloxTab:CreateButton({ Name = "Redz Hub (Keyless)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end })
+        BloxTab:CreateButton({ Name = "Min Hub (No Lag)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/JonnyCheeser/bloxfruits/main/minhubv4"))() end })
+        BloxTab:CreateButton({ Name = "Zaque Hub (Fruit Finder)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Mei2232/ZaqueHub/main/Zaque%20Hub"))() end })
+        BloxTab:CreateButton({ Name = "Banana Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Nghia11n/Banana-Hub/main/bananahub.lua"))() end })
+
+        -- [TAB: BUILD A BOAT ⛵]
         local BABFTTab = Window:CreateTab("Build A Boat ⛵", 4483362458)
-        BABFTTab:CreateSection("Auto-Farming & Building")
+        BABFTTab:CreateButton({ Name = "SpectrX Hub (Auto-Farm)", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/Arhangels-team/SpectreX-Hub/main/babft%20auto%20farm.lua'))() end })
+        BABFTTab:CreateButton({ Name = "Asu Hub (Auto-Builder)", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Loader.lua'))() end })
 
-        BABFTTab:CreateButton({
-            Name = "SpectrX Hub (Best Mobile Farm)",
-            Callback = function()
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/Arhangels-team/SpectreX-Hub/main/babft%20auto%20farm.lua'))()
-            end
-        })
-
-        BABFTTab:CreateButton({
-            Name = "Asu Hub (Auto-Build & More)",
-            Callback = function()
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Loader.lua'))()
-            end
-        })
-
-        BABFTTab:CreateButton({
-            Name = "Vynixius BABFT",
-            Callback = function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Build%20A%20Boat%20For%20Treasure/Source.lua"))()
-            end
-        })
-
-        -- [TSB - THE STRONGEST BATTLEGROUNDS]
+        -- [TAB: TSB 🥋]
         local TSBTab = Window:CreateTab("TSB 🥋", 4483362458)
-        TSBTab:CreateSection("Keyless Kill Farms")
-        TSBTab:CreateButton({
-            Name = "Speed Hub X (Auto-Kill)",
-            Callback = function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
-            end
-        })
+        TSBTab:CreateButton({ Name = "Speed Hub X (Keyless Kill Farm)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))() end })
+        TSBTab:CreateButton({ Name = "Vexon Hub (Combat)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))() end })
 
-        -- [JJS - JUJUTSU SHENANIGANS]
+        -- [TAB: JJS 👊]
         local JJSTab = Window:CreateTab("JJS 👊", 4483362458)
-        JJSTab:CreateButton({ Name = "SMN2 Main", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end })
+        JJSTab:CreateButton({ Name = "SMN2 Main (Auto-Block)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end })
         JJSTab:CreateButton({ Name = "Kajun Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Kajun123/KajunHub/main/KajunHub.lua"))() end })
 
-        -- [BLOX FRUITS]
-        local BloxTab = Window:CreateTab("Blox Fruits 🏴‍☠️", 4483362458)
-        BloxTab:CreateButton({ Name = "Redz Hub (Mobile)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end })
-
-        -- [UNIVERSAL]
+        -- [TAB: UNIVERSAL 🌌]
         local UnivTab = Window:CreateTab("Universal 🌌", 4483362458)
         UnivTab:CreateButton({ Name = "Infinite Yield", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end })
+        UnivTab:CreateButton({ Name = "Dex Explorer (Mobile)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))() end })
 
-        -- [PLAYER]
+        -- [TAB: PLAYER 🏃]
         local PlayerTab = Window:CreateTab("Player 🏃", 4483362458)
-        PlayerTab:CreateSlider({ Name = "Speed", Range = {16, 300}, Increment = 1, CurrentValue = 16, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end })
-        
+        PlayerTab:CreateSlider({ Name = "WalkSpeed", Range = {16, 500}, Increment = 1, CurrentValue = 16, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end })
+        PlayerTab:CreateSlider({ Name = "JumpPower", Range = {50, 500}, Increment = 1, CurrentValue = 50, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.JumpPower = v end })
+
+        ----------------------------------------------------
     else
-        WrongAttempts = WrongAttempts + 1
-        if WrongAttempts >= 2 then
-            game.Players.LocalPlayer:Kick("❌ Invalid Key.")
-        else
-            SubmitBtn.Text = "WRONG! (1/2)"
-            task.wait(1.5)
-            SubmitBtn.Text = "LOGIN"
-        end
+        TextBox.Text = ""
+        TextBox.PlaceholderText = "INVALID KEY!"
+        task.wait(1.5)
+        TextBox.PlaceholderText = "Paste Key Here..."
     end
 end)
