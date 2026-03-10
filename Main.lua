@@ -4,122 +4,113 @@ local LinkvertiseKey = "Tent-acoustic-neck eight-adapt-category IX;i4j-n:fLAlIsB
 local MyLinkvertise = "https://linkvertise.com/2419595/dQ836JlqG4QY?o=sharing"
 local DiscordServer = "https://discord.gg/cukP3aqCe"
 
--- [[ GUI SETUP ]]
-local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+-- [[ CLEAN UI SETUP ]]
+local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 local MainFrame = Instance.new("Frame", ScreenGui)
-MainFrame.Size = UDim2.new(0, 350, 0, 250) -- Made slightly taller for extra buttons
-MainFrame.Position = UDim2.new(0.5, -175, 0.5, -125)
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainFrame.BorderSizePixel = 0
-MainFrame.Active = true
-MainFrame.Draggable = true
-
 local UICorner = Instance.new("UICorner", MainFrame)
 local UIStroke = Instance.new("UIStroke", MainFrame)
+
+MainFrame.Name = "JulzLogin"
+MainFrame.Size = UDim2.new(0, 320, 0, 260)
+MainFrame.Position = UDim2.new(0.5, -160, 0.5, -130)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.Active = true
+MainFrame.Draggable = true -- Essential for Mobile
+
+UICorner.CornerRadius = UDim.new(0, 10)
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Thickness = 2
+UIStroke.Thickness = 1.5
 
 -- Title
 local Title = Instance.new("TextLabel", MainFrame)
-Title.Size = UDim2.new(1, 0, 0, 45)
-Title.Text = "JULZ HUB | LOGIN"
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Text = "JULZ HUB V4.5"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.Font = Enum.Font.GothamBold
-Title.TextSize = 20
+Title.TextSize = 18
 
--- Key Input
+-- Status Label (Feedback for User)
+local Status = Instance.new("TextLabel", MainFrame)
+Status.Size = UDim2.new(1, 0, 0, 20)
+Status.Position = UDim2.new(0, 0, 0.88, 0)
+Status.Text = "Waiting for key..."
+Status.TextColor3 = Color3.fromRGB(150, 150, 150)
+Status.BackgroundTransparency = 1
+Status.Font = Enum.Font.Gotham
+Status.TextSize = 12
+
+-- Input Box
 local TextBox = Instance.new("TextBox", MainFrame)
-TextBox.Size = UDim2.new(0, 300, 0, 45)
-TextBox.Position = UDim2.new(0.5, -150, 0.35, -20)
-TextBox.PlaceholderText = "Enter Master Key or Linkvertise Key..."
+TextBox.Size = UDim2.new(0, 260, 0, 40)
+TextBox.Position = UDim2.new(0.5, -130, 0.3, 0)
+TextBox.PlaceholderText = "Enter Key Here..."
 TextBox.Text = ""
-TextBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-TextBox.TextColor3 = Color3.new(1,1,1)
+TextBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextBox.TextColor3 = Color3.new(1, 1, 1)
 Instance.new("UICorner", TextBox)
 
--- [[ BUTTONS ]]
+-- [[ BUTTON SYSTEM ]]
+local function CreateBtn(name, pos, color, callback)
+    local btn = Instance.new("TextButton", MainFrame)
+    btn.Size = UDim2.new(0, 125, 0, 35)
+    btn.Position = pos
+    btn.Text = name
+    btn.BackgroundColor3 = color
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 12
+    Instance.new("UICorner", btn)
+    btn.MouseButton1Click:Connect(callback)
+    return btn
+end
 
--- 1. Verify Button
-local VerifyBtn = Instance.new("TextButton", MainFrame)
-VerifyBtn.Size = UDim2.new(0, 145, 0, 35)
-VerifyBtn.Position = UDim2.new(0.07, 0, 0.65, 0)
-VerifyBtn.Text = "Verify Key"
-VerifyBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
-VerifyBtn.TextColor3 = Color3.new(1, 1, 1)
-Instance.new("UICorner", VerifyBtn)
-
--- 2. Get Key Button
-local GetKeyBtn = Instance.new("TextButton", MainFrame)
-GetKeyBtn.Size = UDim2.new(0, 145, 0, 35)
-GetKeyBtn.Position = UDim2.new(0.51, 0, 0.65, 0)
-GetKeyBtn.Text = "Get Key (Copy)"
-GetKeyBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
-GetKeyBtn.TextColor3 = Color3.new(1, 1, 1)
-Instance.new("UICorner", GetKeyBtn)
-
--- 3. Join Discord Button
-local DiscordBtn = Instance.new("TextButton", MainFrame)
-DiscordBtn.Size = UDim2.new(0, 300, 0, 35)
-DiscordBtn.Position = UDim2.new(0.5, -150, 0.82, 0)
-DiscordBtn.Text = "Join Discord (Copy)"
-DiscordBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242) -- Discord Blurple
-DiscordBtn.TextColor3 = Color3.new(1, 1, 1)
-Instance.new("UICorner", DiscordBtn)
-
--- [[ LOGIC ]]
-
--- Get Key Logic
-GetKeyBtn.MouseButton1Click:Connect(function()
-    setclipboard(MyLinkvertise)
-    GetKeyBtn.Text = "Link Copied!"
-    task.wait(2)
-    GetKeyBtn.Text = "Get Key (Copy)"
-end)
-
--- Discord Logic
-DiscordBtn.MouseButton1Click:Connect(function()
-    setclipboard(DiscordServer)
-    DiscordBtn.Text = "Discord Link Copied!"
-    task.wait(2)
-    DiscordBtn.Text = "Join Discord (Copy)"
-end)
-
--- Verify Logic
-VerifyBtn.MouseButton1Click:Connect(function()
+-- 1. Verify
+CreateBtn("VERIFY", UDim2.new(0.08, 0, 0.52, 0), Color3.fromRGB(0, 170, 0), function()
     if TextBox.Text == MasterKey or TextBox.Text == LinkvertiseKey then
+        Status.Text = "✅ SUCCESS! LOADING..."
+        Status.TextColor3 = Color3.new(0, 1, 0)
+        task.wait(1)
         ScreenGui:Destroy()
         
-        -- LOAD THE FULL JULZ HUB
+        -- LOAD RAYFIELD HUB
         local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         local Window = Rayfield:CreateWindow({
-           Name = "Julz Hub | V4.5 EMPIRE",
-           LoadingTitle = "Mobile Excellence",
+           Name = "Julz Hub | V4.5",
+           LoadingTitle = "Empire Loading...",
            LoadingSubtitle = "by JULZ",
            Theme = "Default"
         })
 
-        -- [TAB: BLOX FRUITS 🏴‍☠️]
-        local BloxTab = Window:CreateTab("Blox Fruits 🏴‍☠️", 4483362458)
-        BloxTab:CreateButton({ Name = "Redz Hub (Keyless)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end })
-        BloxTab:CreateButton({ Name = "Mukuru Hub (Working)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX7/X/main/Mukuru.lua"))() end })
-        BloxTab:CreateButton({ Name = "Volcano Hub (Sea 3)", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/RippeR731/Volcano/main/Volcano.lua"))() end })
+        local MainTab = Window:CreateTab("Blox Fruits 🏴‍☠️")
+        MainTab:CreateButton({Name = "Redz Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end})
+        MainTab:CreateButton({Name = "Mukuru Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX7/X/main/Mukuru.lua"))() end})
 
-        -- [TAB: OTHER GAMES]
-        local GamesTab = Window:CreateTab("Other Games 🎮", 4483362458)
-        GamesTab:CreateButton({ Name = "TSB: Speed Hub X", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))() end })
-        GamesTab:CreateButton({ Name = "JJS: SMN2 Main", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end })
-        GamesTab:CreateButton({ Name = "BABFT: SpectrX Farm", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/Arhangels-team/SpectreX-Hub/main/babft%20auto%20farm.lua'))() end })
+        local GamesTab = Window:CreateTab("Other 🎮")
+        GamesTab:CreateButton({Name = "TSB: Speed Hub X", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))() end})
+        GamesTab:CreateButton({Name = "JJS: SMN2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end})
 
-        -- [TAB: PLAYER]
-        local PlayerTab = Window:CreateTab("Player 🏃", 4483362458)
-        PlayerTab:CreateSlider({ Name = "WalkSpeed", Range = {16, 500}, Increment = 1, CurrentValue = 16, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end })
-        PlayerTab:CreateButton({ Name = "Infinite Yield", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end })
-
+        local PlayerTab = Window:CreateTab("Player 🏃")
+        PlayerTab:CreateSlider({Name = "WalkSpeed", Range = {16, 500}, Increment = 1, CurrentValue = 16, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end})
     else
+        Status.Text = "❌ INVALID KEY!"
+        Status.TextColor3 = Color3.new(1, 0, 0)
         TextBox.Text = ""
-        TextBox.PlaceholderText = "❌ INVALID KEY!"
-        task.wait(1.5)
-        TextBox.PlaceholderText = "Enter Master Key or Linkvertise Key..."
+        task.wait(2)
+        Status.Text = "Waiting for key..."
+        Status.TextColor3 = Color3.fromRGB(150, 150, 150)
     end
 end)
+
+-- 2. Get Key
+CreateBtn("GET KEY", UDim2.new(0.53, 0, 0.52, 0), Color3.fromRGB(0, 120, 255), function()
+    setclipboard(MyLinkvertise)
+    Status.Text = "Linkvertise Copied!"
+end)
+
+-- 3. Discord
+local Disc = CreateBtn("JOIN DISCORD", UDim2.new(0.08, 0, 0.72, 0), Color3.fromRGB(88, 101, 242), function()
+    setclipboard(DiscordServer)
+    Status.Text = "Discord Link Copied!"
+end)
+Disc.Size =
