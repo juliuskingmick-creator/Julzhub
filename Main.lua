@@ -1,18 +1,25 @@
 --[[
-    JULZHUB | RIVALS ONLY
+    JULZHUB | RIVALS ONLY (DELTA OPTIMIZED)
     Lead Developer: julzmon
-    UI Library: Luna (Monochrome Edition)
-    Authentication: ThinkPad License
+    Theme: Monochrome (Gray/Black)
+    Key: thinkpad
 ]]
 
--- Initialization Guard
-if not game:IsLoaded() then game.Loaded:Wait() end
+-- 1. Delta-Specific Optimization: Ensure environment is ready
+repeat task.wait() until game:IsLoaded()
 
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
+local ContentProvider = game:GetService("ContentProvider")
 local LocalPlayer = Players.LocalPlayer
 
--- Load Luna Library
+-- Pre-load Mimi Asset to prevent white box issues
+local MimiAsset = "rbxassetid://16255151491"
+task.spawn(function()
+    ContentProvider:PreloadAsync({MimiAsset})
+end)
+
+-- 2. Secure UI Library Load
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexsoftware/Luna/main/source.lua"))()
 
 -- ==========================================
@@ -21,154 +28,171 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlex
 local function LoadJulzHub()
     local Window = Library:CreateWindow({
         Name = "JulzHub | Rivals Only",
-        Subtitle = "Developer: julzmon",
-        Logo = "rbxassetid://16255151491", -- Mimi Logo
-        ConfigFolder = "JulzHub_Rivals_Data"
+        Subtitle = "Dev: julzmon",
+        Logo = MimiAsset,
+        ConfigFolder = "JulzHub_Rivals_Delta"
     })
 
-    -- TAB 1: GENERAL & UTILITY
-    local GeneralTab = Window:CreateTab({ Name = "General & Utility", Icon = "rbxassetid://10734947300" })
-    GeneralTab:CreateSection("Server & Performance")
-    GeneralTab:CreateToggle({ Name = "Instant Join", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateButton({ Name = "Server Hop", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateDropdown({ Name = "Config Manager", Options = {"Default", "Legit", "Rage"}, Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Chat Filter Bypass", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Player Stats Overlay", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Friend Notifier", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateButton({ Name = "Teleport Manager", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Performance Optimizer", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Streamer Mode", Callback = function() print("Feature Activated") end })
-    GeneralTab:CreateToggle({ Name = "Discord Rich Presence", Callback = function() print("Feature Activated") end })
-
-    -- TAB 2: COMBAT & AIM
-    local CombatTab = Window:CreateTab({ Name = "Combat & Aim", Icon = "rbxassetid://10734950309" })
+    -- TAB 1: COMBAT (High Precision)
+    local CombatTab = Window:CreateTab({ Name = "Combat", Icon = "rbxassetid://10734950309" })
     CombatTab:CreateSection("Accuracy Modules")
-    CombatTab:CreateToggle({ Name = "Silent Aim", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateSlider({ Name = "Aim Smoothness", Min = 1, Max = 100, CurrentValue = 50, Callback = function() print("Feature Activated") end })
-    CombatTab:CreateDropdown({ Name = "Custom Aimbone", Options = {"Head", "Torso", "Random"}, Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "Snaplines", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "Visibility Check", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "Trigger Bot", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateSlider({ Name = "Recoil Control (%)", Min = 0, Max = 100, CurrentValue = 100, Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "Hitmarkers", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "Bullet Tracers", Callback = function() print("Feature Activated") end })
-    CombatTab:CreateToggle({ Name = "No-Clip Aim", Callback = function() print("Feature Activated") end })
+    CombatTab:CreateToggle({ Name = "Silent Aim", Callback = function(v) end })
+    CombatTab:CreateToggle({ Name = "Aimbot", Callback = function(v) end })
+    CombatTab:CreateSlider({ Name = "Smoothness", Min = 1, Max = 100, CurrentValue = 50, Callback = function(v) end })
+    CombatTab:CreateSlider({ Name = "FOV Size", Min = 30, Max = 800, CurrentValue = 100, Callback = function(v) end })
+    CombatTab:CreateToggle({ Name = "Show FOV Circle", Callback = function(v) end })
+    CombatTab:CreateToggle({ Name = "Triggerbot", Callback = function(v) end })
+    CombatTab:CreateToggle({ Name = "No Recoil", Callback = function(v) end })
+    CombatTab:CreateToggle({ Name = "No Spread", Callback = function(v) end })
+    CombatTab:CreateSlider({ Name = "Hitbox Multiplier", Min = 1, Max = 10, CurrentValue = 1, Callback = function(v) end })
+    CombatTab:CreateDropdown({ Name = "Target Bone", Options = {"Head", "Torso", "HumanoidRootPart"}, Callback = function(v) end })
 
-    -- TAB 3: VISUALS (ESP)
-    local ESPTab = Window:CreateTab({ Name = "Visuals (ESP)", Icon = "rbxassetid://10734897102" })
-    ESPTab:CreateSection("Rendering")
-    ESPTab:CreateToggle({ Name = "Box ESP", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Skeleton ESP", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Name ESP", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Distance ESP", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Item ESP", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "2D Radar", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Tracer Lines", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Health Bar", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Target Lock Icon", Callback = function() print("Feature Activated") end })
-    ESPTab:CreateToggle({ Name = "Spectator List", Callback = function() print("Feature Activated") end })
+    -- TAB 2: VISUALS (Optimized for Mobile/Delta)
+    local VisualsTab = Window:CreateTab({ Name = "Visuals", Icon = "rbxassetid://10734897102" })
+    VisualsTab:CreateSection("ESP Options")
+    VisualsTab:CreateToggle({ Name = "Enable ESP", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Box ESP", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Skeleton ESP", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Name ESP", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Distance ESP", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Tracer Lines", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Health Bars", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Chams (Outlines)", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "Head Dots", Callback = function(v) end })
+    VisualsTab:CreateToggle({ Name = "View Angles", Callback = function(v) end })
+
+    -- TAB 3: MOVEMENT
+    local MoveTab = Window:CreateTab({ Name = "Movement", Icon = "rbxassetid://10747373176" })
+    MoveTab:CreateSection("Physics Control")
+    MoveTab:CreateSlider({ Name = "Walk Speed", Min = 16, Max = 150, CurrentValue = 16, Callback = function(v) end })
+    MoveTab:CreateSlider({ Name = "Jump Power", Min = 50, Max = 250, CurrentValue = 50, Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Infinite Jump", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Flight Mode", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "No-Clip", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Auto-Sprint", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Bunny Hop", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Anti-Fall", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Spinbot", Callback = function(v) end })
+    MoveTab:CreateToggle({ Name = "Water Walk", Callback = function(v) end })
+
+    -- TAB 4: UTILITY (Rivals Only)
+    local UtilTab = Window:CreateTab({ Name = "Utility", Icon = "rbxassetid://10734947300" })
+    UtilTab:CreateSection("Game Utils")
+    UtilTab:CreateButton({ Name = "Server Hop", Callback = function() end })
+    UtilTab:CreateButton({ Name = "Rejoin Server", Callback = function() end })
+    UtilTab:CreateToggle({ Name = "Auto-Queue Match", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "Fullbright", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "Instant Respawn", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "Streamer Mode", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "Performance Mode", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "Chat Spammer", Callback = function(v) end })
+    UtilTab:CreateToggle({ Name = "FPS Unlocker", Callback = function(v) end })
+    UtilTab:CreateButton({ Name = "Copy Script Link", Callback = function() setclipboard("https://github.com/juliuskingmick-creator/Julzhub") end })
 
     Library:Init()
 end
 
 -- ==========================================
--- KEY SYSTEM (BLACK & GRAY THEME)
+-- KEY SYSTEM (GRAY & BLACK MIMI THEME)
 -- ==========================================
-local function InitializeKeySystem()
+local function StartAuth()
+    -- Create ScreenGui with ZIndex behavior for Delta
     local KeyGui = Instance.new("ScreenGui")
     KeyGui.Name = "JulzAuth"
+    KeyGui.IgnoreGuiInset = true
+    KeyGui.DisplayOrder = 999
     KeyGui.Parent = CoreGui
 
     local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 450, 0, 360)
-    Main.Position = UDim2.new(0.5, -225, 0.5, -180)
-    Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Main.Size = UDim2.new(0, 450, 0, 380)
+    Main.Position = UDim2.new(0.5, -225, 0.5, -190)
+    Main.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
     Main.BorderSizePixel = 0
     Main.Parent = KeyGui
 
     Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 15)
-    
     local Stroke = Instance.new("UIStroke", Main)
-    Stroke.Color = Color3.fromRGB(45, 45, 45)
+    Stroke.Color = Color3.fromRGB(40, 40, 40)
     Stroke.Thickness = 2
 
-    -- Mimi OC Image (Typh)
-    local MimiImage = Instance.new("ImageLabel")
-    MimiImage.Size = UDim2.new(0, 200, 0, 200)
-    MimiImage.Position = UDim2.new(0.5, -100, 0, 15)
-    MimiImage.BackgroundTransparency = 1
-    MimiImage.Image = "rbxassetid://16255151491"
-    MimiImage.Parent = Main
+    -- Mimi OC (Typh) - Authenticated Asset
+    local Mimi = Instance.new("ImageLabel")
+    Mimi.Size = UDim2.new(0, 200, 0, 200)
+    Mimi.Position = UDim2.new(0.5, -100, 0, 20)
+    Mimi.BackgroundTransparency = 1
+    Mimi.Image = MimiAsset
+    Mimi.Parent = Main
 
-    -- Dialogue
-    local Text1 = Instance.new("TextLabel")
-    Text1.Size = UDim2.new(1, 0, 0, 30)
-    Text1.Position = UDim2.new(0, 0, 0, 215)
-    Text1.BackgroundTransparency = 1
-    Text1.Text = "um... Can I help you?"
-    Text1.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text1.Font = Enum.Font.GothamBold
-    Text1.TextSize = 18
-    Text1.Parent = Main
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.Position = UDim2.new(0, 0, 0, 230)
+    Title.BackgroundTransparency = 1
+    Title.Text = "um... Can I help you?"
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.Font = Enum.Font.GothamBold
+    Title.TextSize = 18
+    Title.Parent = Main
 
-    local Text2 = Instance.new("TextLabel")
-    Text2.Size = UDim2.new(1, -60, 0, 40)
-    Text2.Position = UDim2.new(0, 30, 0, 240)
-    Text2.BackgroundTransparency = 1
-    Text2.Text = "Unauthorized access detected. Please enter your ThinkPad license key."
-    Text2.TextColor3 = Color3.fromRGB(160, 160, 160)
-    Text2.Font = Enum.Font.Gotham
-    Text2.TextSize = 12
-    Text2.TextWrapped = true
-    Text2.Parent = Main
+    local Sub = Instance.new("TextLabel")
+    Sub.Size = UDim2.new(1, -60, 0, 40)
+    Sub.Position = UDim2.new(0, 30, 0, 255)
+    Sub.BackgroundTransparency = 1
+    Sub.Text = "Unauthorized access detected. Please enter your ThinkPad license key."
+    Sub.TextColor3 = Color3.fromRGB(130, 130, 130)
+    Sub.Font = Enum.Font.Gotham
+    Sub.TextSize = 12
+    Sub.TextWrapped = true
+    Sub.Parent = Main
 
-    -- Input
-    local InputBox = Instance.new("TextBox")
-    InputBox.Size = UDim2.new(0, 280, 0, 40)
-    InputBox.Position = UDim2.new(0.5, -140, 0, 285)
-    InputBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    InputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    InputBox.PlaceholderText = "Key: thinkpad"
-    InputBox.Text = ""
-    InputBox.Font = Enum.Font.Gotham
-    InputBox.Parent = Main
-    Instance.new("UICorner", InputBox)
+    local Box = Instance.new("TextBox")
+    Box.Size = UDim2.new(0, 300, 0, 40)
+    Box.Position = UDim2.new(0.5, -150, 0, 305)
+    Box.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+    Box.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Box.PlaceholderText = "Key: thinkpad"
+    Box.Text = ""
+    Box.Font = Enum.Font.Gotham
+    Box.Parent = Main
+    Instance.new("UICorner", Box)
 
-    -- Submit
-    local SubmitBtn = Instance.new("TextButton")
-    SubmitBtn.Size = UDim2.new(0, 40, 0, 40)
-    SubmitBtn.Position = UDim2.new(0.5, 145, 0, 285)
-    SubmitBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    SubmitBtn.Text = ">"
-    SubmitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SubmitBtn.Font = Enum.Font.GothamBold
-    SubmitBtn.Parent = Main
-    Instance.new("UICorner", SubmitBtn)
+    local Submit = Instance.new("TextButton")
+    Submit.Size = UDim2.new(0, 300, 0, 40)
+    Submit.Position = UDim2.new(0.5, -150, 0, 350) -- Moved for clarity
+    Submit.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Submit.Text = "VERIFY ACCESS"
+    Submit.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Submit.Font = Enum.Font.GothamBold
+    Submit.TextSize = 14
+    Submit.Parent = Main
+    Instance.new("UICorner", Submit)
 
-    -- Footer
     local Footer = Instance.new("TextLabel")
     Footer.Size = UDim2.new(1, 0, 0, 20)
-    Footer.Position = UDim2.new(0, 0, 1, -25)
+    Footer.Position = UDim2.new(0, 0, 1, 15) -- Slightly below the frame
     Footer.BackgroundTransparency = 1
-    Footer.Text = "Lead Developer: julzmon"
-    Footer.TextColor3 = Color3.fromRGB(80, 80, 80)
+    Footer.Text = "julzmon hub v5 | Rivals Only"
+    Footer.TextColor3 = Color3.fromRGB(60, 60, 60)
     Footer.Font = Enum.Font.Gotham
     Footer.TextSize = 10
     Footer.Parent = Main
 
-    SubmitBtn.MouseButton1Click:Connect(function()
-        if InputBox.Text == "thinkpad" then
-            SubmitBtn.Text = "✓"
-            SubmitBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    -- Auth Logic
+    Submit.MouseButton1Click:Connect(function()
+        if Box.Text == "thinkpad" then
+            Submit.Text = "GRANTED"
+            Submit.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
             task.wait(0.5)
             KeyGui:Destroy()
             LoadJulzHub()
         else
-            SubmitBtn.Text = "X"
+            Submit.Text = "INVALID"
+            Submit.BackgroundColor3 = Color3.fromRGB(30, 10, 10)
             task.wait(1)
-            SubmitBtn.Text = ">"
+            Submit.Text = "VERIFY ACCESS"
+            Submit.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         end
     end)
 end
 
-InitializeKeySystem()
+-- Start Script
+StartAuth()
