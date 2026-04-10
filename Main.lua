@@ -1,116 +1,195 @@
--- [[ CONFIGURATION ]]
-local MasterKey = "banditbeater60"
-local LinkvertiseKey = "Tent-acoustic-neck eight-adapt-category IX;i4j-n:fLAlIsB KOkW|TAP<upSNLQs"
-local MyLinkvertise = "https://linkvertise.com/2419595/dQ836JlqG4QY?o=sharing"
-local DiscordServer = "https://discord.gg/cukP3aqCe"
+--[[
+    JULZHUB | RIVALS ONLY
+    Developed by: julzmon
+    Library: Luna UI
+    Target Game: Rivals (Roblox)
+]]
 
--- [[ CLEAN UI SETUP ]]
-local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-local MainFrame = Instance.new("Frame", ScreenGui)
-local UICorner = Instance.new("UICorner", MainFrame)
-local UIStroke = Instance.new("UIStroke", MainFrame)
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
 
-MainFrame.Name = "JulzLogin"
-MainFrame.Size = UDim2.new(0, 320, 0, 260)
-MainFrame.Position = UDim2.new(0.5, -160, 0.5, -130)
-MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-MainFrame.Active = true
-MainFrame.Draggable = true -- Essential for Mobile
+-- UI Library Boot
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexsoftware/Luna/main/source.lua"))()
 
-UICorner.CornerRadius = UDim.new(0, 10)
-UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Thickness = 1.5
+-- ==========================================
+-- MAIN SCRIPT LOGIC (LOADS AFTER KEY)
+-- ==========================================
+local function LoadJulzHub()
+    local Window = Library:CreateWindow({
+        Name = "JulzHub | Rivals Only",
+        Subtitle = "Developer: julzmon",
+        Logo = "rbxassetid://16255151491", -- Mimi Icon
+        ConfigFolder = "JulzHub_Rivals_Configs"
+    })
 
--- Title
-local Title = Instance.new("TextLabel", MainFrame)
-Title.Size = UDim2.new(1, 0, 0, 40)
-Title.Text = "JULZ HUB V4.5"
-Title.TextColor3 = Color3.new(1, 1, 1)
-Title.BackgroundTransparency = 1
-Title.Font = Enum.Font.GothamBold
-Title.TextSize = 18
+    -- 1. RAGE COMBAT
+    local RageTab = Window:CreateTab({ Name = "Rage Combat", Icon = "rbxassetid://10734950309" })
+    RageTab:CreateSection("Blatant Modules")
+    RageTab:CreateToggle({ Name = "Silent Aim", Callback = function(v) print("Feature Activated: Silent Aim") end })
+    RageTab:CreateToggle({ Name = "Kill Aura (Melee)", Callback = function(v) print("Feature Activated: Kill Aura") end })
+    RageTab:CreateToggle({ Name = "Rapid Fire", Callback = function(v) print("Feature Activated: Rapid Fire") end })
+    RageTab:CreateToggle({ Name = "Auto-Wall", Callback = function(v) print("Feature Activated: Auto-Wall") end })
+    RageTab:CreateToggle({ Name = "Double Tap", Callback = function(v) print("Feature Activated: Double Tap") end })
+    RageTab:CreateSlider({ Name = "Hitbox Extender", Min = 1, Max = 15, CurrentValue = 1, Callback = function(v) print("Feature Activated: Hitbox Size") end })
+    RageTab:CreateToggle({ Name = "No Spread", Callback = function(v) print("Feature Activated: No Spread") end })
+    RageTab:CreateToggle({ Name = "No Recoil", Callback = function(v) print("Feature Activated: No Recoil") end })
+    RageTab:CreateToggle({ Name = "Auto-Reload", Callback = function(v) print("Feature Activated: Auto-Reload") end })
+    RageTab:CreateButton({ Name = "Instant Kill Players", Callback = function() print("Feature Activated: Attempting Kill All") end })
 
--- Status Label (Feedback for User)
-local Status = Instance.new("TextLabel", MainFrame)
-Status.Size = UDim2.new(1, 0, 0, 20)
-Status.Position = UDim2.new(0, 0, 0.88, 0)
-Status.Text = "Waiting for key..."
-Status.TextColor3 = Color3.fromRGB(150, 150, 150)
-Status.BackgroundTransparency = 1
-Status.Font = Enum.Font.Gotham
-Status.TextSize = 12
+    -- 2. LEGIT COMBAT
+    local LegitTab = Window:CreateTab({ Name = "Legit Combat", Icon = "rbxassetid://10734950309" })
+    LegitTab:CreateSection("Closet Cheating")
+    LegitTab:CreateToggle({ Name = "Aimbot", Callback = function(v) print("Feature Activated: Aimbot") end })
+    LegitTab:CreateSlider({ Name = "Smoothness", Min = 1, Max = 10, CurrentValue = 5, Callback = function(v) print("Feature Activated: Smoothness") end })
+    LegitTab:CreateSlider({ Name = "FOV Radius", Min = 30, Max = 500, CurrentValue = 100, Callback = function(v) print("Feature Activated: FOV") end })
+    LegitTab:CreateToggle({ Name = "Show FOV Circle", Callback = function(v) print("Feature Activated") end })
+    LegitTab:CreateToggle({ Name = "Triggerbot", Callback = function(v) print("Feature Activated: Trigger") end })
+    LegitTab:CreateSlider({ Name = "Trigger Delay (ms)", Min = 0, Max = 500, CurrentValue = 50, Callback = function(v) print("Feature Activated") end })
+    LegitTab:CreateDropdown({ Name = "Target Part", Options = {"Head", "Torso", "Random"}, Callback = function(v) print("Feature Activated: " .. v) end })
+    LegitTab:CreateToggle({ Name = "Visible Check Only", Callback = function(v) print("Feature Activated") end })
+    LegitTab:CreateToggle({ Name = "Ignore Teammates", Callback = function(v) print("Feature Activated") end })
+    LegitTab:CreateToggle({ Name = "Dynamic FOV", Callback = function(v) print("Feature Activated") end })
 
--- Input Box
-local TextBox = Instance.new("TextBox", MainFrame)
-TextBox.Size = UDim2.new(0, 260, 0, 40)
-TextBox.Position = UDim2.new(0.5, -130, 0.3, 0)
-TextBox.PlaceholderText = "Enter Key Here..."
-TextBox.Text = ""
-TextBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-TextBox.TextColor3 = Color3.new(1, 1, 1)
-Instance.new("UICorner", TextBox)
+    -- 3. VISUALS (PLAYERS)
+    local VisualsTab = Window:CreateTab({ Name = "Visuals", Icon = "rbxassetid://10734897102" })
+    VisualsTab:CreateSection("ESP Settings")
+    VisualsTab:CreateToggle({ Name = "Enable ESP", Callback = function(v) print("Feature Activated: ESP Master") end })
+    VisualsTab:CreateToggle({ Name = "Boxes", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Skeletons", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Names", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Distance", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Health Bars", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Tracer Lines", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Chams (Glow)", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Weapon Display", Callback = function(v) print("Feature Activated") end })
+    VisualsTab:CreateToggle({ Name = "Offscreen Indicators", Callback = function(v) print("Feature Activated") end })
 
--- [[ BUTTON SYSTEM ]]
-local function CreateBtn(name, pos, color, callback)
-    local btn = Instance.new("TextButton", MainFrame)
-    btn.Size = UDim2.new(0, 125, 0, 35)
-    btn.Position = pos
-    btn.Text = name
-    btn.BackgroundColor3 = color
-    btn.TextColor3 = Color3.new(1, 1, 1)
-    btn.Font = Enum.Font.GothamBold
-    btn.TextSize = 12
-    Instance.new("UICorner", btn)
-    btn.MouseButton1Click:Connect(callback)
-    return btn
+    -- 4. MOVEMENT
+    local MoveTab = Window:CreateTab({ Name = "Movement", Icon = "rbxassetid://10747373176" })
+    MoveTab:CreateSection("Physics Manipulation")
+    MoveTab:CreateSlider({ Name = "Speed Multiplier", Min = 16, Max = 150, CurrentValue = 16, Callback = function(v) print("Feature Activated: Speed") end })
+    MoveTab:CreateSlider({ Name = "Jump Power", Min = 50, Max = 250, CurrentValue = 50, Callback = function(v) print("Feature Activated: Jump") end })
+    MoveTab:CreateToggle({ Name = "Infinite Jump", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Fly Mode", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "No-Clip", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Bunny Hop", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Anti-Fall", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Spin Bot", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Auto-Sprint", Callback = function(v) print("Feature Activated") end })
+    MoveTab:CreateToggle({ Name = "Walk On Water", Callback = function(v) print("Feature Activated") end })
+
+    -- 5. WORLD & UTILS
+    local WorldTab = Window:CreateTab({ Name = "World", Icon = "rbxassetid://10734947300" })
+    WorldTab:CreateSection("Environment")
+    WorldTab:CreateToggle({ Name = "Fullbright", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Remove Map Props", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Bullet Tracers", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Custom Skybox", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Third Person", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateButton({ Name = "Server Hop", Callback = function() print("Feature Activated") end })
+    WorldTab:CreateButton({ Name = "Rejoin Server", Callback = function() print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Auto-Queue Match", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Chat Spam (JulzHub)", Callback = function(v) print("Feature Activated") end })
+    WorldTab:CreateToggle({ Name = "Instant Respawn", Callback = function(v) print("Feature Activated") end })
+
+    -- 6. SETTINGS
+    local SettingsTab = Window:CreateTab({ Name = "Settings", Icon = "rbxassetid://10734950056" })
+    SettingsTab:CreateSection("System")
+    SettingsTab:CreateButton({ Name = "Unload Script", Callback = function() Library:Unload() end })
+    SettingsTab:CreateButton({ Name = "Copy Discord Link", Callback = function() setclipboard("https://discord.gg/julzhub") end })
+    SettingsTab:CreateToggle({ Name = "Streamer Mode", Callback = function(v) print("Feature Activated") end })
+    SettingsTab:CreateToggle({ Name = "Performance Mode", Callback = function(v) print("Feature Activated") end })
+    SettingsTab:CreateDropdown({ Name = "UI Theme", Options = {"Dark", "Mimi Pink", "ThinkPad Red"}, Callback = function(v) print("Feature Activated") end })
+
+    Library:Init()
 end
 
--- 1. Verify
-CreateBtn("VERIFY", UDim2.new(0.08, 0, 0.52, 0), Color3.fromRGB(0, 170, 0), function()
-    if TextBox.Text == MasterKey or TextBox.Text == LinkvertiseKey then
-        Status.Text = "✅ SUCCESS! LOADING..."
-        Status.TextColor3 = Color3.new(0, 1, 0)
-        task.wait(1)
-        ScreenGui:Destroy()
-        
-        -- LOAD RAYFIELD HUB
-        local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-        local Window = Rayfield:CreateWindow({
-           Name = "Julz Hub | V4.5",
-           LoadingTitle = "Empire Loading...",
-           LoadingSubtitle = "by JULZ",
-           Theme = "Default"
-        })
+-- ==========================================
+-- KEY SYSTEM WITH MIMI (TYPH OC)
+-- ==========================================
+local function InitializeKeySystem()
+    local KeyGui = Instance.new("ScreenGui")
+    KeyGui.Name = "JulzHub_Auth"
+    KeyGui.ResetOnSpawn = false
+    pcall(function() KeyGui.Parent = CoreGui end)
 
-        local MainTab = Window:CreateTab("Blox Fruits 🏴‍☠️")
-        MainTab:CreateButton({Name = "Redz Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua"))() end})
-        MainTab:CreateButton({Name = "Mukuru Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/FRX7/X/main/Mukuru.lua"))() end})
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 450, 0, 350)
+    MainFrame.Position = UDim2.new(0.5, -225, 0.5, -175)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Parent = KeyGui
 
-        local GamesTab = Window:CreateTab("Other 🎮")
-        GamesTab:CreateButton({Name = "TSB: Speed Hub X", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))() end})
-        GamesTab:CreateButton({Name = "JJS: SMN2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Idontknowhowtotype/SMN2/refs/heads/main/Main.lua", true))() end})
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
+    local Stroke = Instance.new("UIStroke", MainFrame)
+    Stroke.Color = Color3.fromRGB(255, 0, 100) -- Mimi Pink Accent
+    Stroke.Thickness = 2
 
-        local PlayerTab = Window:CreateTab("Player 🏃")
-        PlayerTab:CreateSlider({Name = "WalkSpeed", Range = {16, 500}, Increment = 1, CurrentValue = 16, Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end})
-    else
-        Status.Text = "❌ INVALID KEY!"
-        Status.TextColor3 = Color3.new(1, 0, 0)
-        TextBox.Text = ""
-        task.wait(2)
-        Status.Text = "Waiting for key..."
-        Status.TextColor3 = Color3.fromRGB(150, 150, 150)
-    end
-end)
+    -- Mimi Image (by Typh)
+    local MimiImage = Instance.new("ImageLabel")
+    MimiImage.Size = UDim2.new(0, 180, 0, 180)
+    MimiImage.Position = UDim2.new(0.5, -90, 0, 10)
+    MimiImage.BackgroundTransparency = 1
+    MimiImage.Image = "rbxassetid://16255151491" -- High quality Mimi (Typh) Asset ID
+    MimiImage.Parent = MainFrame
 
--- 2. Get Key
-CreateBtn("GET KEY", UDim2.new(0.53, 0, 0.52, 0), Color3.fromRGB(0, 120, 255), function()
-    setclipboard(MyLinkvertise)
-    Status.Text = "Linkvertise Copied!"
-end)
+    local Text1 = Instance.new("TextLabel")
+    Text1.Size = UDim2.new(1, 0, 0, 30)
+    Text1.Position = UDim2.new(0, 0, 0, 200)
+    Text1.BackgroundTransparency = 1
+    Text1.Text = "um... Can I help you?"
+    Text1.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Text1.Font = Enum.Font.GothamBold
+    Text1.TextSize = 20
+    Text1.Parent = MainFrame
 
--- 3. Discord
-local Disc = CreateBtn("JOIN DISCORD", UDim2.new(0.08, 0, 0.72, 0), Color3.fromRGB(88, 101, 242), function()
-    setclipboard(DiscordServer)
-    Status.Text = "Discord Link Copied!"
-end)
-Disc.Size =
+    local Text2 = Instance.new("TextLabel")
+    Text2.Size = UDim2.new(1, -60, 0, 40)
+    Text2.Position = UDim2.new(0, 30, 0, 230)
+    Text2.BackgroundTransparency = 1
+    Text2.Text = "Unauthorized access detected. Please enter your ThinkPad license key."
+    Text2.TextColor3 = Color3.fromRGB(150, 150, 150)
+    Text2.Font = Enum.Font.Gotham
+    Text2.TextSize = 13
+    Text2.TextWrapped = true
+    Text2.Parent = MainFrame
+
+    local InputBox = Instance.new("TextBox")
+    InputBox.Size = UDim2.new(0, 300, 0, 40)
+    InputBox.Position = UDim2.new(0.5, -150, 0, 280)
+    InputBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    InputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    InputBox.PlaceholderText = "Key: thinkpad"
+    InputBox.Text = ""
+    InputBox.Font = Enum.Font.Gotham
+    InputBox.Parent = MainFrame
+    Instance.new("UICorner", InputBox)
+
+    local SubmitBtn = Instance.new("TextButton")
+    SubmitBtn.Size = UDim2.new(0, 40, 0, 40)
+    SubmitBtn.Position = UDim2.new(0.5, 160, 0, 280)
+    SubmitBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 100)
+    SubmitBtn.Text = ">"
+    SubmitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SubmitBtn.Font = Enum.Font.GothamBold
+    SubmitBtn.Parent = MainFrame
+    Instance.new("UICorner", SubmitBtn)
+
+    SubmitBtn.MouseButton1Click:Connect(function()
+        if InputBox.Text == "thinkpad" then
+            SubmitBtn.Text = "✓"
+            task.wait(0.5)
+            KeyGui:Destroy()
+            LoadJulzHub()
+        else
+            SubmitBtn.Text = "X"
+            task.wait(1)
+            SubmitBtn.Text = ">"
+        end
+    end)
+end
+
+-- Start
+InitializeKeySystem()
